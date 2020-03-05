@@ -18,8 +18,7 @@ class App extends Component {
 
   async loadGenres() {
     try {
-      let genres = await apiCalls.getGenres();
-      debugger   
+      let genres = await apiCalls.getGenres();       
       this.setState(genres);
     } catch (err) {
       console.error(err)
@@ -30,22 +29,6 @@ class App extends Component {
 
     componentDidMount() {
       this.loadGenres();
-      // let genresUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${KEY}&language=en-US`;
-      
-      // fetch(genresUrl)
-      // .then(res =>{
-      //   if(!res.ok) {
-      //     throw new Error('Network reaponse was not ok');
-      //   }
-      //   return res.json();
-      // })
-      // .then(res => { 
-      //   console.log(res.genres);      
-      //   this.setState({genres: res.genres});
-      // })
-      // .catch((error) => {
-      //   console.error('There was problem with your fetch operation: ', error);
-      // });
     }
   
   render() {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './scss/GenreList.scss';
 
 
 // class GenreList extends Component {
@@ -15,8 +16,8 @@ import React, { Component } from 'react';
 //   }
 // }
 
-function GenreList(props) {     
-    let links = props.genres.map(val => (
+function GenreList({genres}) {     
+    let links = genres.map(val => (
     <li key={val.id}>{val.name}</li>
     ))
     return (
