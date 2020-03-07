@@ -11,7 +11,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      genres: []
+      genres: [],
+      popular: []
     };
     
   }
@@ -25,17 +26,29 @@ class App extends Component {
     }
   }
 
+  async loadPopular() {
+    try {
+      let popular =  await apiCalls.getPopular();      
+      this.setState({popular: popular.results});
+    } catch (err) {
+      console.error(err);
+    }
+  }
   
 
     componentDidMount() {
       this.loadGenres();
+      this.loadPopular();
     }
   
   render() {
     return (
       <div className="App">
         <Header />
-        <Content genres={this.state.genres} />
+        <Content
+        genres={this.state.genres}
+        popular={this.state.popular}
+        />
         <Footer />
       </div>
     );

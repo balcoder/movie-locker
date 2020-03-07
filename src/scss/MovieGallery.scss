@@ -1,0 +1,63 @@
+.movie-gallery {
+  width: 85vw;
+  display: flex;  
+  flex-direction: column;
+  align-items: center;  
+  color: white; 
+
+}
+
+.gallery {
+  // remove list styles
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;  
+}
+
+.gallery-item:not(:last-of-type) {
+  margin-bottom: 40px;
+}
+
+.gallery-img {
+  max-width: 100%;
+}
+
+.gallery-im-caption {
+	margin: 0;
+	padding: 8px;
+	background: #3a3a3a;
+	color: #f2f2f2;
+}
+
+// Responsive Styles
+@media screen and (min-width: 769px) {
+	
+	.gallery-wrapper {
+		max-width: 1240px;
+	}
+	
+	.gallery {
+
+		// Responsive flexbox styles
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+
+	}
+	
+	.gallery-item {
+		padding: 20px;
+	}
+	
+	.gallery-img {
+		min-width: 185px;
+		max-width: 350px;
+	}
+	
+}

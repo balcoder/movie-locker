@@ -8,7 +8,7 @@ function Content(props) {
   return (
     <div className="content">
       <GenreList  genres={props.genres}/>
-      <MovieGallery />      
+      <MovieGallery popular={props.popular} />      
       </div>
   );
 }
