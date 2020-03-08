@@ -21,18 +21,25 @@
 }
 
 .gallery-item:not(:last-of-type) {
-  margin-bottom: 40px;
+
+	margin-bottom: 40px;
+
 }
 
 .gallery-img {
-  max-width: 100%;
+  max-width:184px;
 }
 
-.gallery-im-caption {
+.gallery-caption {	
+	white-space: nowrap;
+  overflow: hidden;
+	text-overflow: ellipsis;	
+	width:154px;
 	margin: 0;
 	padding: 8px;
-	background: #3a3a3a;
+	background: #263f44;
 	color: #f2f2f2;
+	border-radius: 5%;
 }
 
 // Responsive Styles
@@ -53,11 +60,17 @@
 	
 	.gallery-item {
 		padding: 20px;
+		
 	}
 	
 	.gallery-img {
 		min-width: 185px;
+    max-width: 350px;
+    border-radius: 5px;
+	}
+	.gallery-caption {
 		max-width: 350px;
+		min-width: 185px;
 	}
 	
 }

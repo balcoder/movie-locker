@@ -1,30 +1,59 @@
 import React, { Component } from 'react';
+import {  
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import Header from './Header';
 import Content from './Content';
 import Footer from  './Footer';
 import * as apiCalls from './api';
 import './scss/App.scss';
-import { KEY } from './movie-locker.config';
 
-let GENRES = {};
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       genres: [],
-      popular: []
+      popular: [],
+      genreIds: []
     };
     
   }
 
-  async loadGenres() {
+  // get list of genres with their ids
+  async loadGenreIds() {
     try {
-      let genres = await apiCalls.getGenres();       
-      this.setState(genres);
+      let genreIds = await apiCalls.getGenre();
+      console.log('genreIds:::',genreIds)                 
+      this.setState({genreIds: genreIds.genres});
     } catch (err) {
       console.error(err)
     }
   }
+
+  // get a list of movies with a genre id
+  async loadGenresWithIds() {
+    try {
+      let genreList =  await apiCalls.getGenres(27); 
+      console.log("This is it:::::", genreList)     
+      this.setState({genres: genreList.results});
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  // get array of objs {name, id, url} for each genre id
+  // async loadGenreLists() {
+  //   try {
+  //     let genreLists =  await apiCalls.getGenre(27); 
+  //     console.log("This is it:::::", genreList)     
+  //     this.setState({genreList: genreList.results});
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // }
+  
 
   async loadPopular() {
     try {
@@ -37,8 +66,9 @@ class App extends Component {
   
 
     componentDidMount() {
-      this.loadGenres();
+      this.loadGenresWithIds();
       this.loadPopular();
+      this.loadGenreIds();
     }
   
   render() {
@@ -46,7 +76,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <Content
-        genres={this.state.genres}
+        genreIds={this.state.genreIds}
         popular={this.state.popular}
         />
         <Footer />

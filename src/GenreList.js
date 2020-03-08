@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import './scss/GenreList.scss';
 
-
+const BASEURL = "";
 // class GenreList extends Component {
 //   constructor(props) {
 //     super(props)
@@ -16,9 +22,19 @@ import './scss/GenreList.scss';
 //   }
 // }
 
-function GenreList({genres}) {     
-    let links = genres.map(val => (
-    <li key={val.id}>{val.name}</li>
+function GenreList({genreIds}) { 
+    debugger    
+    let links = genreIds.map(val => (
+    <li
+     key={val.id}
+     data-id={val.id}
+     >
+    <Link 
+    to="/genre"
+    className="genre-link">
+    {val.name}
+    </Link> 
+    </li>
     ))
     return (
       <div className="genre-list">

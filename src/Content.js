@@ -3,11 +3,10 @@ import './scss/Content.scss';
 import GenreList from './GenreList';
 import MovieGallery from './MovieGallery';
 
-function Content(props) {
-  console.log("Content" ,props.genres.genres);
+function Content(props) {  
   return (
     <div className="content">
-      <GenreList  genres={props.genres}/>
+      <GenreList  genreIds={props.genreIds}/>
       <MovieGallery popular={props.popular} />      
       </div>
   );
