@@ -23,6 +23,8 @@ function handleError(res) {
   }  
   return res.json();
 }
+
+
 // get list of genres with their ids
 export async function getGenre() {  
   return fetch(GENRESURL)    
@@ -30,7 +32,7 @@ export async function getGenre() {
 }
 
 
-// get a list of movies with a genre id
+// get a list of movies with a genre id like 'Action' = 
 export async function getGenres(id) {
   return fetch(`${GENREURL}&with_genres=${id}`)
     .then(res => handleError(res))

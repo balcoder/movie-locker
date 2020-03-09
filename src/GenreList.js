@@ -22,16 +22,17 @@ const BASEURL = "";
 //   }
 // }
 
-function GenreList({genreIds}) { 
-    debugger    
+function GenreList({genreIds, onGenreClick}) {       
     let links = genreIds.map(val => (
     <li
      key={val.id}
      data-id={val.id}
      >
     <Link 
-    to="/genre"
-    className="genre-link">
+    to={`/${val.name.toLowerCase()}`}
+    className="genre-link"
+    onClick={onGenreClick}
+    data-genre-id={val.id}>
     {val.name}
     </Link> 
     </li>

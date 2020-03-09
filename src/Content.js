@@ -6,7 +6,9 @@ import MovieGallery from './MovieGallery';
 function Content(props) {  
   return (
     <div className="content">
-      <GenreList  genreIds={props.genreIds}/>
+      <GenreList
+      genreIds={props.genreIds}
+      onGenreClick={props.onGenreClick} />
       <MovieGallery popular={props.popular} />      
       </div>
   );

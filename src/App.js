@@ -16,9 +16,10 @@ class App extends Component {
     this.state = {
       genres: [],
       popular: [],
-      genreIds: []
+      genreIds: [],
+      currentView: []
     };
-    
+    this.onGenreClick = this.onGenreClick.bind(this);
   }
 
   // get list of genres with their ids
@@ -33,10 +34,10 @@ class App extends Component {
   }
 
   // get a list of movies with a genre id
-  async loadGenresWithIds() {
+  async loadGenresWithIds(id) {
     try {
-      let genreList =  await apiCalls.getGenres(27); 
-      console.log("This is it:::::", genreList)     
+      let genreList =  await apiCalls.getGenres(id); 
+      console.log("This is it:::::",id, genreList)     
       this.setState({genres: genreList.results});
     } catch (err) {
       console.error(err);
@@ -63,10 +64,15 @@ class App extends Component {
       console.error(err);
     }
   }
+
+  onGenreClick(e) {
+    let genreId = e.target.getAttribute('data-genre-id');
+    this.loadGenresWithIds(genreId);
+  }
   
 
     componentDidMount() {
-      this.loadGenresWithIds();
+      // this.loadGenresWithIds();
       this.loadPopular();
       this.loadGenreIds();
     }
@@ -76,6 +82,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <Content
+        onGenreClick={this.onGenreClick}
         genreIds={this.state.genreIds}
         popular={this.state.popular}
         />
