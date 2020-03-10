@@ -24,21 +24,17 @@ function handleError(res) {
   return res.json();
 }
 
-
 // get list of genres with their ids
 export async function getGenre() {  
   return fetch(GENRESURL)    
     .then(res => handleError(res))
 }
 
-
-// get a list of movies with a genre id like 'Action' = 
+// get a list of movies with a genre id (like 'Action' = 27)
 export async function getGenres(id) {
   return fetch(`${GENREURL}&with_genres=${id}`)
     .then(res => handleError(res))
 }
-
-
 
 export async function getPopular() {
   return fetch(POPULARURL)

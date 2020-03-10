@@ -38,22 +38,11 @@ class App extends Component {
     try {
       let genreList =  await apiCalls.getGenres(id); 
       console.log("This is it:::::",id, genreList)     
-      this.setState({genres: genreList.results});
+      this.setState({popular: genreList.results});
     } catch (err) {
       console.error(err);
     }
   }
-
-  // get array of objs {name, id, url} for each genre id
-  // async loadGenreLists() {
-  //   try {
-  //     let genreLists =  await apiCalls.getGenre(27); 
-  //     console.log("This is it:::::", genreList)     
-  //     this.setState({genreList: genreList.results});
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // }
   
 
   async loadPopular() {
