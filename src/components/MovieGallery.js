@@ -19,7 +19,8 @@ class MovieGallery extends Component {
   // get a list of movies with a genre id
   async loadGenresWithIds(id) {
     try {
-      let genreList =  await apiCalls.getGenres(id);        
+      let genreList =  await apiCalls.getGenres(id); 
+      console.log("This is it:::::",id, genreList)     
       this.setState({genres: genreList.results});
     } catch (err) {
       console.error(err);
@@ -27,12 +28,12 @@ class MovieGallery extends Component {
   }
 
   componentDidMount() {
-  //this.loadGenresWithIds(this.props.params.id);
+  this.loadGenresWithIds(this.props.params.id);
    
   }
  
-  render() {    
-    this.loadGenresWithIds(this.props.params.id);
+  render() { 
+    //console.log("Genre ID::",this.props.match.params.id);  
     let movies = this.state.genres.map((movie) => {
       return (       
         <li 
@@ -49,7 +50,8 @@ class MovieGallery extends Component {
           
         </li>        
         );
-      });
+    });
+
     return (
       <div className="movie-gallery">
          <ul className="gallery">

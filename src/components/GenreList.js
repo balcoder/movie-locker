@@ -10,7 +10,7 @@ import './scss/GenreList.scss';
 
 
 
-function GenreList({genreIds}) {       
+function GenreList({genreIds, onGenreClick}) {       
     let links = genreIds.map(val => (
     <li
      key={val.id}
@@ -18,7 +18,8 @@ function GenreList({genreIds}) {
      >
     <Link 
     to={`/genre/${val.id}`}
-    className="genre-link"    
+    className="genre-link"
+    // onClick={onGenreClick}
     data-genre-id={val.id}>
     {val.name}
     </Link> 

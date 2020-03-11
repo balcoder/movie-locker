@@ -7,33 +7,32 @@ const baseUrlW92 = "http://image.tmdb.org/t/p/w92/"
 const baseUrlW154 = "http://image.tmdb.org/t/p/w154/"
 const baseUrlW185 = "http://image.tmdb.org/t/p/w185/"
 
-class MovieGallery extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      genres: []      
+      popular: []      
     };
     
   }
   
-  // get a list of movies with a genre id
-  async loadGenresWithIds(id) {
+  async loadPopular() {
     try {
-      let genreList =  await apiCalls.getGenres(id);        
-      this.setState({genres: genreList.results});
+      let popular =  await apiCalls.getPopular();      
+      this.setState({popular: popular.results});
     } catch (err) {
       console.error(err);
     }
   }
 
   componentDidMount() {
-  //this.loadGenresWithIds(this.props.params.id);
+  this. loadPopular(this.props.params.id);
    
   }
  
-  render() {    
-    this.loadGenresWithIds(this.props.params.id);
-    let movies = this.state.genres.map((movie) => {
+  render() {   
+    
+    let movies = this.state.popular.map((movie) => {
       return (       
         <li 
         className="gallery-item"
@@ -61,4 +60,4 @@ class MovieGallery extends Component {
   }
 }
 
-export default MovieGallery;
+export default Home;

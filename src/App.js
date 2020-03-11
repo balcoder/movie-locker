@@ -38,7 +38,7 @@ class App extends Component {
     try {
       let genreList =  await apiCalls.getGenres(id); 
       console.log("This is it:::::",id, genreList)     
-      this.setState({popular: genreList.results});
+      this.setState({genres: genreList.results});
     } catch (err) {
       console.error(err);
     }
@@ -71,8 +71,9 @@ class App extends Component {
       <div className="App">
         <Header />
         <Content
-        onGenreClick={this.onGenreClick}
+        // onGenreClick={this.onGenreClick}
         genreIds={this.state.genreIds}
+       // genres={this.state.genres}
         popular={this.state.popular}
         />
         <Footer />

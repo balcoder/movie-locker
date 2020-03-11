@@ -1,17 +1,10 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
 import './scss/Content.scss';
 import Home from './Home';
+import Movie from './Movie';
 import GenreList from './GenreList';
 import MovieGallery from './MovieGallery';
-import Movie from './Movie';
-
-
+import { Switch, Route } from 'react-router-dom';
 
 function Content(props) {   
   
@@ -19,12 +12,13 @@ function Content(props) {
     <div className="content">   
       <GenreList
       genreIds={props.genreIds}
-       />
-      <Switch> 
-      <Route exact path="/" render={({ match }) => (
-            <Home {...match} {...props} />
+      onGenreClick={props.onGenreClick} />
+      <Switch>
+        <Route path="/" exact render={(routeProps) => (
+            <Home {...routeProps} {...props} />
           )}
-        />            
+        />
+         
         <Route path="/genre/:id" render={({ match }) => (
             <MovieGallery {...match} {...props} />
           )}
@@ -32,15 +26,23 @@ function Content(props) {
         <Route 
           path="/movie/:id"
           render={(routeProps) => (
-            <Movie {...routeProps} props />
+            <Movie {...routeProps} {...props} />
           )}
         />  
-      </Switch>     
+      </Switch>
+             
+      
+      
+      {/* <MovieGallery popular={props.popular} />       */}
       </div>
   );
 }
 
-
+const TestParams = ({ match }) => (
+  <div>
+    {match.params.id}
+  </div>
+)
 
 
 
