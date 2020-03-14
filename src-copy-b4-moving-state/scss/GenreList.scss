@@ -1,0 +1,20 @@
+.genre-list { 
+  width: 15vw;
+  min-width: 180px;
+  color: white;
+  background-color: rgb(70, 75, 60);
+  
+  ul {  
+    list-style: none;
+    & li {
+      padding: 2px;
+      
+  }
+  a {
+    text-decoration: none;
+    color: rgb(238, 229, 229);
+  }
+}
+
+
+}

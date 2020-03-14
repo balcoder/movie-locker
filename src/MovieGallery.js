@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './scss/MovieGallery.scss'
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom'
+
+import getPage from './helper';
 import * as apiCalls from './api';
 
 const baseUrlW92 = "http://image.tmdb.org/t/p/w92/"
@@ -11,29 +14,59 @@ class MovieGallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      genres: []      
+      genres: [],
+      numPages: 5,
+      currentPage: 1,
+      currentView: []      
     };
-    
+
+     this.handleClickPage = this.handleClickPage.bind(this);
   }
   
   // get a list of movies with a genre id
   async loadGenresWithIds(id) {
     try {
-      let genreList =  await apiCalls.getGenres(id);        
-      this.setState({genres: genreList.results});
+      let genreList =  await apiCalls.getGenres(id);
+      console.log(genreList);
+      let currentView = getPage(this.state.currentPage, genreList); 
+      console.log('currnetView', currentView)
+      this.setState({genres: genreList, currentView: currentView});
     } catch (err) {
       console.error(err);
     }
   }
 
+  handleClickPage(e) {
+    let pageNum = e.target.id
+    let nextView = getPage(pageNum, this.state.genres)
+    
+    this.setState({currentPage: pageNum, currentView: nextView});
+  }
+
+  
+
   componentDidMount() {
-  //this.loadGenresWithIds(this.props.params.id);
+  this.loadGenresWithIds(this.props.params.id);
    
+  }
+
+  renderPagelinks() {
+    let pageNumbers = [];
+    for(let i = 1; i <= this.state.numPages; i++) {
+      pageNumbers.push(
+        <li
+        key={i}
+        id={i}
+        onClick={this.handleClickPage}
+      >{i}</li>
+      )
+    }
+    return (pageNumbers);
   }
  
   render() {    
-    this.loadGenresWithIds(this.props.params.id);
-    let movies = this.state.genres.map((movie) => {
+   //this.loadGenresWithIds(this.props.params.id);
+    let movies = this.state.currentView.map((movie) => {
       return (       
         <li 
         className="gallery-item"
@@ -55,10 +88,13 @@ class MovieGallery extends Component {
          <ul className="gallery">
          {movies}
          </ul>
+         <ul className="pageLinks">
+           {this.renderPagelinks()}
+         </ul>
         
       </div>
     );
   }
 }
 
-export default MovieGallery;
+export default withRouter(MovieGallery);

@@ -1,7 +1,7 @@
 import { KEY } from './movie-locker.config';
 const APIURL = 'https://api.themoviedb.org/3/';
 const GENRESURL = `${APIURL}genre/movie/list?api_key=${KEY}&language=en-US&include_adult=false&page=1`;
-const GENREURL = `${APIURL}discover/movie?api_key=${KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=`;
+const GENREURL = `${APIURL}discover/movie?api_key=${KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`;
 const POPULARURL = `${APIURL}discover/movie?api_key=${KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=`;
 const INNOWURL = `${APIURL}discover/movie?api_key=${KEY}&language=en-US&page=2&primary_release_date.gte=2020-02-05&primary_release_date.lte=2020-03-04`;
 const TOPRATEDURL = `${APIURL}movie/top_rated?api_key=${KEY}&language=en-US&page=1`
@@ -37,9 +37,7 @@ export async function getGenre() {
 // }
 export async function getGenres(id) {
   let promises = [];
-  for(let i = 1; i <= 5; i++) { // loop through 5 pages
-    // console.log(i);
-    // console.log(`${GENREURL}${i}&with_genres=${id}`)
+  for(let i = 1; i <= 5; i++) { // loop through 10 pages
  promises.push(fetch(`${GENREURL}${i}&with_genres=${id}`)
     .then(res => handleError(res)))
   }

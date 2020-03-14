@@ -1,0 +1,65 @@
+/*
+Colors
+*/
+:root {
+  // set up css custom properties/variables
+  --color-primary: #263f44;
+  --color-primary-light: #3c5d64;
+  --color-primary-dark: #27363a;
+
+  --color-grey-light-1: #faf9f9;
+  --color-grey-light-2: #f4f2f2;
+  --color-grey-light-3: #f0eeee;
+  --color-grey-light-4: #ccc;
+
+  --color-grey-dark-1: #333;
+  --color-grey-dark-2: #777;
+  --color-grey-dark-3: #999;
+
+  --shadow-dark: 0 2rem 6rem rgba(0,0,0, .3);
+  --shadow-light: 0 2rem 5rem rgba(0,0,0,.1);
+}
+
+//sass variables
+$breakpoint-largest: 75em; //1200/16px = 75em
+$breakpoint-large: 68.75em; //1100/16px = 68.75em
+$breakpoint-tab: 56.25em;  //900/16px = 56.25em
+$breakpoint-phone: 37.5em; //600/16px = 37.5em
+$breakpoint-phone-small: 31.25em; //500/16px = 31.25em
+
+// reset margin and padding
+* {
+  margin: 0;
+  padding: 0;
+}
+
+// universal box sizing with inheritance, setting parent to content-box ensures all children will inherit
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;  //1rem = 10px, 10px/16px = 62.5%
+
+  // change global font-size smaller at 1100px and hence the dependent rem size
+  @media only screen and (max-width: $breakpoint-large) {
+    font-size: 50%;
+  }
+}
+
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-grey-dark-2);
+  background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
+  background-repeat: no-repeat;
+
+
+  min-height: 100vh;
+
+}

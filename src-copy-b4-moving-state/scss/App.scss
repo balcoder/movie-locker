@@ -1,0 +1,15 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;  
+  align-items: center;
+  background-color: olivedrab;
+  min-height: 100vh;
+}

@@ -1,0 +1,1 @@
+export const KEY = 'Your Api Key'; // Substitute your api key here

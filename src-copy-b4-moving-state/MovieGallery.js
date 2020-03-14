@@ -8,72 +8,41 @@ const baseUrlW92 = "http://image.tmdb.org/t/p/w92/"
 const baseUrlW154 = "http://image.tmdb.org/t/p/w154/"
 const baseUrlW185 = "http://image.tmdb.org/t/p/w185/"
 
-class Home extends Component {
+class MovieGallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      popular: [],
-      currentView: [], 
+      genres: [],
+      numPages: 5,
       currentPage: 1,
-      numPages: 10
+      currentView: []      
     };
-    
-    this.handleClickPage = this.handleClickPage.bind(this);
+
+     this.handleClickPage = this.handleClickPage.bind(this);
   }
   
-  async loadPopular() {
+  // get a list of movies with a genre id
+  async loadGenresWithIds(id) {
     try {
-      let popular =  await apiCalls.getPopular();
-      let currentView =  getPage(this.state.currentPage, popular)      
-      this.setState({popular: popular, currentView: currentView});
-      
+      let genreList =  await apiCalls.getGenres(id);
+      console.log( 'genreList',genreList);        
+      this.setState({genres: genreList});
     } catch (err) {
       console.error(err);
     }
   }
 
-  // getPage(pageNum, arr) {
-  //   let pageResult = arr.find(val => val.page === parseInt(pageNum, 10));
-  //   console.log(pageResult);
-  //   return pageResult.results;
-  // }
-
   handleClickPage(e) {
     let pageNum = e.target.id
-    let nextView = getPage(pageNum, this.state.popular)
+    let nextView = getPage(pageNum, this.state.genres)
     
     this.setState({currentPage: pageNum, currentView: nextView});
   }
 
-  // async loadPopular() {
-  //   try {
-  //     let results =  await apiCalls.getPopular();
-  //     console.log(results);      
-  //     let popular = [];
-  //     results.forEach(val => {        
-  //       val.results.forEach(movie => {
-  //         if(!movie.poater_path){
-  //           popular.push(movie);
-  //         }         
-  //       })       
-  //     })     
-  //     this.setState({popular: popular});
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // }
-
-  // loadCurrentView(pageNum) {
-  //   console.log(this.state.popular);
-  //   //let moviesWithImg =  this.state.popular[pageNum -1].results.filter(val => val.poster_path !== null );
-  //   //let pageResult = moviesWithImg.find(val => val.page === pageNum);
-  //   //console.log(pageResult);
-  // }
+  
 
   componentDidMount() {
-  this.loadPopular(this.props.params.id);
-  // console.log(this.state.popular);
-  // this.loadCurrentView(1)
+  this.loadGenresWithIds(this.props.params.id);
    
   }
 
@@ -92,6 +61,7 @@ class Home extends Component {
   }
  
   render() {    
+   // this.loadGenresWithIds(this.props.params.id);
     let movies = this.state.currentView.map((movie) => {
       return (       
         <li 
@@ -117,9 +87,10 @@ class Home extends Component {
          <ul className="pageLinks">
            {this.renderPagelinks()}
          </ul>
+        
       </div>
     );
   }
 }
 
-export default Home;
+export default MovieGallery;
